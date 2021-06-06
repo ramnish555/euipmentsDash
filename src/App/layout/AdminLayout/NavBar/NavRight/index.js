@@ -18,11 +18,11 @@ class NavRight extends Component {
 
         return (
             <Aux>          
-                <h4 style={{margin: "unset",paddingLeft: "20px",color: "#1dc4e9"}}>Equipments Dash</h4>
+                <h4 style={{margin: "unset",paddingLeft: "30px",color: "#1dc4e9"}}>Equipments Dash</h4>
                 <ul className="navbar-nav ml-auto">
                     <li>
                         <Dropdown alignRight={!this.props.rtlLayout} className="drp-user">
-                            <Dropdown.Toggle variant={'link'} id="dropdown-basic">
+                            <Dropdown.Toggle variant={'link'} id="dropdown-basic" style={{textDecoration: "none"}}>
                                 <i className="icon feather icon-settings"/>
                             </Dropdown.Toggle>
                             <Dropdown.Menu alignRight className="profile-notification">

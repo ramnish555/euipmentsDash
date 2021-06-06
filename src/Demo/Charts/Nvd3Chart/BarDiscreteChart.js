@@ -1,49 +1,35 @@
 import React from 'react';
 import NVD3Chart from 'react-nvd3';
+import api_data from '../../Other/ApiData';
+import './barChart.css';
 
-const datum = [
+let cat_obj = [];
+let datum = [
     {
-        key: "Cumulative Return",
-        values: [{
-            "label": "A",
-            "value": -29.765957771107,
-            "color": "#3ebfea"
-        }, {
-            "label": "B",
-            "value": 10,
-            "color": "#04a9f5"
-        }, {
-            "label": "C",
-            "value": 32.807804682612,
-            "color": "#ff8a65"
-        }, {
-            "label": "D",
-            "value": 196.45946739256,
-            "color": "#1de9b6"
-        }, {
-            "label": "E",
-            "value": 0.25434030906893,
-            "color": "#4C5667"
-        }, {
-            "label": "F",
-            "value": -98.079782601442,
-            "color": "#69CEC6"
-        }, {
-            "label": "G",
-            "value": -13.925743130903,
-            "color": "#a389d4"
-        }, {
-            "label": "H",
-            "value": -5.1387322875705,
-            "color": "#FE8A7D"
-        }]
+        key: "Department",
+        values: []
     }
 ];
+api_data.map((val)=>{
+    cat_obj.push(val["Department"]);
+});
+
+const arr_to_obj = arr => arr.reduce((obj, e) => {
+    obj[e] = (obj[e] || 0) + 1;
+    return obj;
+}, {});
+cat_obj = arr_to_obj(cat_obj);
+
+for(let val in cat_obj){
+    let obj = {};
+    obj["label"] = val;
+    obj["value"] = cat_obj[val];
+    datum[0]["values"].push(obj);
+}
 
 class BarDiscreteChart extends React.Component {
-
     render() {
-        return <NVD3Chart tooltip={{enabled: true}} type="discreteBarChart" datum={datum} x="label" y="value" height={300} showValues />
+        return <div className="barChart"><NVD3Chart tooltip={{enabled: true}} type="discreteBarChart" datum={datum} x="label" y="value" height={300} showValues={false}/></div>
     }
 }
 

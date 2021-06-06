@@ -1,102 +1,112 @@
-import React, {Component} from 'react';
-import {Row, Col} from 'react-bootstrap';
-
-import Aux from "../../hoc/_Aux";
-import Card from "../../App/components/MainCard";
-import DataTable from 'react-data-table-component';
+import MUIDataTable from "mui-datatables";
 import api_data from './ApiData';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
-const data = api_data;
-console.log(data);
 const columns = [
   {
-    name: 'ID',
-    selector: 'ID',
-    sortable: true,
+    name: "ID",
+    label: "ID",
+  //  options: {
+  //   filter: true,
+  //   sort: true,
+  //   filterType: 'textfield',
+  //   print: false,
+  //  }
   },
   {
-    name: 'Equipment_Name',
-    selector: 'Equipment_Name',
-    sortable: true,
-    right: true,
+    name: "Equipment_Name",
+    label: "Equipment_Name",
   },
   {
-    name: 'Equipment_ID',
-    selector: 'Equipment_ID',
-    sortable: true,
+    name: "Equipment_ID",
+    label: "Equipment_ID",
   },
   {
-    name: 'Complete_specification',
-    selector: 'Complete_specification',
-    sortable: true,
-    right: true,
+    name: "Complete_specification",
+    label: "Complete_Specification",
+    options: {
+      setCellProps: () => ({ style: { minWidth: "300px", maxWidth: "400px" }}),
+      customBodyRender: (data, type, row) => {return <span>{data}</span>}
+    },
   },
   {
-    name: 'Department',
-    selector: 'Department',
-    sortable: true,
+    name: "Department",
+    label: "Department",
   },
   {
-    name: 'Date_Of_Purchase',
-    selector: 'Date_Of_Purchase',
-    sortable: true,
-    right: true,
+    name: "Date_Of_Purchase",
+    label: "Date_Of_Purchase",
   },
   {
-    name: 'Bill_Date',
-    selector: 'Bill_Date',
-    sortable: true,
+    name: "Bill_Date",
+    label: "Bill_Date",
   },
   {
-    name: 'Cost_of_equipment',
-    selector: 'Cost_of_equipment',
-    sortable: true,
-    right: true,
+    name: "Cost_of_equipment",
+    label: "Cost_of_equipment",
   },
   {
-    name: 'Equip_Status',
-    selector: 'Equip_Status',
-    sortable: true,
-    right: true,
+    name: "Equip_Status",
+    label: "Equip_Status",
   },
   {
-    name: 'Unit_Name',
-    selector: 'Unit_Name',
-    sortable: true,
+    name: "Unit_Name",
+    label: "Unit_Name",
   },
   {
-    name: 'Equip_Remarks',
-    selector: 'Equip_Remarks',
-    sortable: true,
-    right: true,
+    name: "Equip_Remarks",
+    label: "Equip_Remarks",
   },
   {
-    name: 'Category',
-    selector: 'Category',
-    sortable: true,
-    right: true,
+    name: "Category",
+    label: "Category",
   },
 ];
+ 
+const data = api_data;
 
+ const options = {
+  filter: true,
+  sort: true,
+  selectableRows: 'multiple',
+  filterType: 'textField',
+  responsive: 'vertical',
+  rowsPerPage: 6,
+};
 
-class SamplePage extends Component {
-    render() {
-        return (
-            <Aux>
-                <Row>
-                    <Col>
-                        {/* <Card title='Hello Card' isOption> */}
-                            <DataTable
-                                columns={columns}
-                                data={data}
-                                pagination={true}
-                            />
-                        {/* </Card> */}
-                    </Col>
-                </Row>
-            </Aux>
-        );
+const SamplePage = () => {
+  const getMuiTheme = () => createMuiTheme({
+    overrides: {
+      MuiTableCell: {
+        head: {
+            backgroundColor: "#3f4d67 !important",
+        },
+      },
+      MUIDataTableHeadCell: {
+        toolButton: {
+          color: "#a9b7d0 !important",
+          fontSize: "15px !important",
+        },
+      },
+      MUIDataTableBodyCell: {
+        root: {
+          padding: "3px !important",
+        }
+      },
     }
+  })
+  return(
+    <>
+      <MuiThemeProvider theme={getMuiTheme()}>
+        <MUIDataTable
+          title={"Equipments"}
+          data={data}
+          columns={columns}
+          options={options}
+        />
+      </MuiThemeProvider>
+    </>
+  )
 }
 
 export default SamplePage;
