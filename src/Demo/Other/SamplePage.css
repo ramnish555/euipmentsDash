@@ -1,0 +1,15 @@
+.MuiTableCell-paddingCheckbox {
+    background: white !important;
+}
+
+.table td, .table th {
+    border: none !important;
+}
+
+.MuiFormControl-root {
+    margin: 0px !important;
+}
+
+.Toastify__toast-container--bottom-center .Toastify__toast-body {
+    text-align: center !important;
+  }

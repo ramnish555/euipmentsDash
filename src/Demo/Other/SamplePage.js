@@ -1,17 +1,13 @@
 import MUIDataTable from "mui-datatables";
 import api_data from './ApiData';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import './SamplePage.css';
+import CustomToolbar from "./AddForm";
 
 const columns = [
   {
     name: "ID",
     label: "ID",
-  //  options: {
-  //   filter: true,
-  //   sort: true,
-  //   filterType: 'textfield',
-  //   print: false,
-  //  }
   },
   {
     name: "Equipment_Name",
@@ -36,14 +32,23 @@ const columns = [
   {
     name: "Date_Of_Purchase",
     label: "Date_Of_Purchase",
+    options: {
+      customBodyRender: (data, type, row) => {return <span>{data ? data.substring(0, 10): null}</span>}
+    },
   },
   {
     name: "Bill_Date",
     label: "Bill_Date",
+    options: {
+      customBodyRender: (data, type, row) => {return <span>{data ? data.substring(0, 10): null}</span>}
+    },
   },
   {
     name: "Cost_of_equipment",
     label: "Cost_of_equipment",
+    options: {
+      customBodyRender: (data, type, row) => {return <span>₹ {data}</span>}
+    },
   },
   {
     name: "Equip_Status",
@@ -65,13 +70,18 @@ const columns = [
  
 const data = api_data;
 
- const options = {
+const options = {
   filter: true,
   sort: true,
   selectableRows: 'multiple',
   filterType: 'textField',
   responsive: 'vertical',
   rowsPerPage: 6,
+  customToolbar: () => {
+    return (
+      <CustomToolbar />
+    );
+  }
 };
 
 const SamplePage = () => {
