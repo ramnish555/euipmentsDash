@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/Demo/Charts/Nvd3Chart/barChart.css"],"names":[],"mappings":"AAAA,qBACI,YACJ","file":"11.71f364a8.chunk.css","sourcesContent":[".barChart .nv-x text {\r\n    display: none;\r\n}"]}
