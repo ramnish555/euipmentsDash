@@ -12,4 +12,9 @@
 
 .Toastify__toast-container--bottom-center .Toastify__toast-body {
     text-align: center !important;
-  }
+}
+
+th{
+    color: #a9b7d0 !important;
+    font-size: 15px !important;
+}

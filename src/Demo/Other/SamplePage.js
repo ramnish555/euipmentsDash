@@ -3,8 +3,24 @@ import api_data from './ApiData';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import './SamplePage.css';
 import CustomToolbar from "./AddForm";
+import UpdateForm from "./UpdateForm";
 
 const columns = [
+  {
+    name: "Edit",
+    label: "Edit",
+    options: {
+      filter: false,
+      sort: false,
+      customBodyRender: (value, tableMeta, updateValue) => {
+        return (
+          <>
+            <UpdateForm list={tableMeta.rowData}/> 
+          </>
+        );
+      }
+    }
+  },
   {
     name: "ID",
     label: "ID",
@@ -70,19 +86,6 @@ const columns = [
  
 const data = api_data;
 
-const options = {
-  filter: true,
-  sort: true,
-  selectableRows: 'multiple',
-  filterType: 'textField',
-  responsive: 'vertical',
-  rowsPerPage: 6,
-  customToolbar: () => {
-    return (
-      <CustomToolbar />
-    );
-  }
-};
 
 const SamplePage = () => {
   const getMuiTheme = () => createMuiTheme({
@@ -105,6 +108,22 @@ const SamplePage = () => {
       },
     }
   })
+
+  const options = {
+    filter: true,
+    sort: true,
+    selectableRows: 'multiple',
+    filterType: 'textField',
+    responsive: 'vertical',
+    rowsPerPage: 6,
+    rowsPerPageOptions: [6,10, 15, 20],
+    customToolbar: () => {
+      return (
+        <CustomToolbar />
+      );
+    }
+  };
+
   return(
     <>
       <MuiThemeProvider theme={getMuiTheme()}>
